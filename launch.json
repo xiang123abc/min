@@ -1,0 +1,64 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Main Process",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "startElectron","--","--inspect=9229" ],
+      "console": "integratedTerminal",
+      "outputCapture": "std",
+      "skipFiles": ["<node_internals>/​**​"]
+    },
+    {
+      "name": "Debug Renderer Process",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}",
+      "timeout": 30000,
+      "urlFilter": "http://localhost:*",
+      "sourceMaps": true,
+      "skipFiles": ["<node_internals>/​**​"]
+    },
+    {
+      "name": "Debug All (Main + Renderer)",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "console": "integratedTerminal",
+      "outputCapture": "std",
+      "skipFiles": ["<node_internals>/​**​"]
+    },
+    {
+      "name": "Run Tests",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "test"],
+      "console": "integratedTerminal",
+      "outputCapture": "std",
+      "skipFiles": ["<node_internals>/​**​"]
+    },
+    {
+      "name": "Debug Build Script",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/buildMain.js",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/​**​"]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Main and Renderer",
+      "configurations": ["Debug Main Process", "Debug Renderer Process"]
+    }
+  ]
+}
